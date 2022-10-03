@@ -1,0 +1,29 @@
+{
+  "name": "nodejs-hw-01",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index",
+    "dev": "nodemon index",
+    "list": "node index --action='list'",
+    "get-id": "node index --action='get' --id=5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vasia-movchan/NodeJS-hw-01.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vasia-movchan/NodeJS-hw-01/issues"
+  },
+  "homepage": "https://github.com/vasia-movchan/NodeJS-hw-01#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "yargs": "^17.6.0"
+  }
+}
