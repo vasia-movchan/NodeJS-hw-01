@@ -8,7 +8,9 @@
     "start": "node index",
     "dev": "nodemon index",
     "list": "node index --action='list'",
-    "get-id": "node index --action='get' --id=5"
+    "get-id": "node index --action='get' --id=5",
+    "remove": "node index --action='remove' --id=3",
+    "add": "node index --action='add' --name='Mango' --email='mango@gmail.com' --phone='322-22-22'"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,7 @@
     "nodemon": "^2.0.20"
   },
   "dependencies": {
+    "nanoid": "^3.3.4",
     "yargs": "^17.6.0"
   }
 }

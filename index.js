@@ -1,6 +1,11 @@
 const fs = require('fs').promises;
 const argv = require('yargs').argv;
-const { listContacts, getContactById } = require('./contacts');
+const {
+  listContacts,
+  getContactById,
+  removeContact,
+  addContact,
+} = require('./contacts');
 
 async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
@@ -14,13 +19,18 @@ async function invokeAction({ action, id, name, email, phone }) {
       console.table(contactById);
       break;
 
-    // case 'add':
-    //   // ... name email phone
-    //   break;
+    case 'add':
+      const newContacts = await addContact(name, email, phone);
+      console.table(newContacts);
 
-    // case 'remove':
-    //   // ... id
-    //   break;
+      break;
+
+    case 'remove':
+      const contactsAfterRemove = await removeContact(id);
+      contactsAfterRemove
+        ? console.table(contactsAfterRemove)
+        : console.log('Contacts by id not found');
+      break;
 
     default:
       console.warn('\x1B[31m Unknown action type!');

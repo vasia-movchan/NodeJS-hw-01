@@ -1,5 +1,6 @@
 const fs = require('fs').promises;
 const path = require('path');
+const { nanoid } = require('nanoid');
 
 const contactsPath = path.join(__dirname, './db/contacts.json');
 
@@ -16,15 +17,39 @@ async function getContactById(contactId) {
   return contactById || null;
 }
 
-// function removeContact(contactId) {
-//   // ...твій код
-// }
+async function removeContact(contactId) {
+  const contacts = await listContacts();
+  const id = contacts.find((contact) => contact.id === contactId.toString());
 
-// function addContact(name, email, phone) {
-//   // ...твій код
-// }
+  if (id) {
+    const contactsAfterRemove = contacts.filter(
+      (contact) => contact.id !== contactId.toString()
+    );
+    await fs.writeFile(contactsPath, JSON.stringify(contactsAfterRemove));
+    return contactsAfterRemove;
+  }
+
+  return null;
+}
+
+async function addContact(name, email, phone) {
+  const newContact = {
+    id: nanoid(),
+    name,
+    email,
+    phone,
+  };
+
+  const contacts = await listContacts();
+  const newContacts = [...contacts, newContact];
+  await fs.writeFile(contactsPath, JSON.stringify(newContacts));
+
+  return newContacts;
+}
 
 module.exports = {
   listContacts,
   getContactById,
+  removeContact,
+  addContact,
 };
